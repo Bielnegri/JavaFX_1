@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,7 +34,8 @@ public class UsuarioControl {
         usuario.setNome(nome.get());
         usuario.setTelefone(telefone.get());
         usuario.setEmail(email.get());
-        LocalDate dataNasc = LocalDate.parse(nascimento.get());
+        DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate dataNasc = LocalDate.parse(nascimento.get(), formatador);
         usuario.setDataNasc(dataNasc);
         this.usuarios.add(usuario);
     }
@@ -44,7 +46,8 @@ public class UsuarioControl {
                 nome.set(usuario.getNome());
                 telefone.set(usuario.getTelefone());
                 email.set(usuario.getEmail());
-                nascimento.set(usuario.getDataNasc().toString());
+                DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                nascimento.set(usuario.getDataNasc().format(formatador));
             }
         }
     }
